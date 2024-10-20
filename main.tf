@@ -36,3 +36,23 @@ resource "aws_lb" "alb" {
 
   tags = merge(var.tags,{"Name"="${var.name}-alb-${var.env}"})
   }
+
+
+
+resource "aws_lb_listener" "main" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "unauthorized"
+      status_code  = "403"
+    }
+  }
+}
+
+
