@@ -31,7 +31,7 @@ resource "aws_lb" "alb" {
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
 
   tags = merge(var.tags,{"Name"="${var.name}-alb-${var.env}"})
